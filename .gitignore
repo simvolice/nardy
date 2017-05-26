@@ -104,16 +104,7 @@ typings/
 .env
 
 
-.gitignore
+
 .idea/
-ReadMe.md
-app.js
-bin/
-mongod.cfg.yaml
-package.json
-public/
-routes/
-services/
-tests/
-utils/
+
 /public/
