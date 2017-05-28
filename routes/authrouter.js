@@ -10,9 +10,6 @@ const checkSeesionToken = require('../utils/checkSeesionToken');
 const AuthService = require('../services/Auth');
 
 
-
-
-
 const uuidV4 = require('uuid/v4');
 
 
@@ -37,7 +34,7 @@ router.use(async (req, res, next) => {
     let tokenFromClient = req.body.tokenCSRF || req.get('tokenCSRF') || req.query.tokenCSRF;
 
 
-    if (validator.checkProps(tokenFromClient)) {
+    if (validator.checkReqBody(req)) {
 
       let result = await AuthService.getCsrfToken(tokenFromClient);
 
@@ -102,7 +99,7 @@ router.post('/auth', async (req, res, next) =>{
 
 
 
-  if (validator.checkProps(req.body.email) && validator.checkProps(req.body.pass)) {
+
 
     let result = await AuthService.login(req.body.email);
 
@@ -112,7 +109,7 @@ router.post('/auth', async (req, res, next) =>{
     if (validator.checkProps(result) && bcrypt.compareSync(req.body.pass, result.pass)) {
 
 
-      res.json({"code": "ok", "sessionToken": jsonwebtoken.sign(result._id.toString(), config.SECRETJSONWEBTOKEN)});
+      res.json({"code": 0, "sessionToken": jsonwebtoken.sign(result._id.toString(), config.SECRETJSONWEBTOKEN)});
 
 
     }else {
@@ -128,14 +125,6 @@ router.post('/auth', async (req, res, next) =>{
 
 
 
-  } else {
-
-
-
-    res.json({"code": 1});
-
-
-  }
 
 
 

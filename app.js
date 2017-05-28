@@ -5,7 +5,7 @@ const logger = require('morgan');
 
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
-const createDir = require('./utils/createDir');
+
 const dbConnect = require('./utils/dbConnect');
 
 const cors = require('cors');//TODO В продакте обязательно удалить
@@ -14,7 +14,7 @@ const cors = require('cors');//TODO В продакте обязательно �
 
 
 const app = express();
-
+app.set('trust proxy', 'loopback');
 app.use(helmet());
 app.use(helmet.noCache());
 app.use(helmet.referrerPolicy());
@@ -54,7 +54,7 @@ require('./routes')(app);
 
 dbConnect.connect();
 
-createDir.createAllDir();
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
