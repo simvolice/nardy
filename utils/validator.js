@@ -72,7 +72,7 @@ module.exports = {
 
 
 
-  checkReqBody: (req) => {
+    checkReqBody: (req) => {
 
 
 
